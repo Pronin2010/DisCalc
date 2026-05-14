@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class RawOrderReaderAdapter implements OrderReader{
+public class RawOrderReaderAdapter implements OrderReader {
     private static final String DELIMITER = "#";
 
     @Override
-    public List<Order> readOrder(String filePath){
-        try{
+    public List<Order> readOrder(String filePath) {
+        try {
             return Files.lines(Path.of(filePath))
                     .map(line -> line.split(DELIMITER))
                     .filter(parts -> parts.length == 3)

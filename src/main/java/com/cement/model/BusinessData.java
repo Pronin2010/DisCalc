@@ -2,15 +2,23 @@ package com.cement.model;
 
 public class BusinessData {
 
-    private int priceFor50Kg = 500;
-    private int kgPerBag = 50;
-    private int startDiscountPercent = 50;
-    private int discountStep = 5;
-    private int minDiscountPercent = 0;
+    private int priceFor50Kg;
+    private int kgPerBag;
+    private int startDiscountPercent;
+    private int discountStep;
+    private int minDiscountPercent;
+    private String inputFilePath;
+    private String resultFilePath;
 
-
-
-
+    public BusinessData(int priceFor50Kg, int kgPerBag, int startDiscountPercent, int discountStep, int minDiscountPercent, String inputFilePath, String resultFilePath) {
+        this.priceFor50Kg = priceFor50Kg;
+        this.kgPerBag = kgPerBag;
+        this.startDiscountPercent = startDiscountPercent;
+        this.discountStep = discountStep;
+        this.minDiscountPercent = minDiscountPercent;
+        this.inputFilePath = inputFilePath;
+        this.resultFilePath = resultFilePath;
+    }
 
     public int getPriceFor50Kg() {
         return priceFor50Kg;
@@ -50,5 +58,21 @@ public class BusinessData {
 
     public void setMinDiscountPercent(int minDiscountPercent) {
         this.minDiscountPercent = minDiscountPercent;
+    }
+
+    public String getInputFilePath() {
+        return inputFilePath;
+    }
+
+    public void setInputFilePath(String inputFilePath) {
+        this.inputFilePath = inputFilePath;
+    }
+
+    public String getResultFilePath() {
+        return resultFilePath;
+    }
+
+    public void setResultFilePath(String resultFilePath) {
+        this.resultFilePath = resultFilePath;
     }
 }

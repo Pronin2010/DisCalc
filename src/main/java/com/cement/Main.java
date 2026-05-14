@@ -1,38 +1,28 @@
 package com.cement;
 
-import com.cement.model.Order;
-import com.cement.service.DiscountService;
-import com.cement.service.ReadOrderFromFile;
-import com.cement.service.WriteResultInFile;
 import com.cement.model.BusinessData;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.cement.service.BuisnessLogicMain;
 
 
 public class Main {
 
     static void main(String[] args) {
 
-        String inputFilePath = "InputData/discount_day.txt";
-        String resultFilePath = "OutputData/result.txt";
+        BusinessData businessData = new BusinessData(
+                500,
+                50,
+                50,
+                5,
+                0,
+                "InputData/discount_day.txt",
+                "OutputData/result.txt"
+        );
 
-        List<Order> allOrders = new ArrayList<>();
-        ReadOrderFromFile readOrder = new ReadOrderFromFile();
-        WriteResultInFile writeResult = new WriteResultInFile();
-        DiscountService discountService = new DiscountService();
-        BusinessData businessData = new BusinessData();
-
-        allOrders.addAll(readOrder.readOrdersFromFile(inputFilePath));
-        writeResult.writeResultInFile((discountService.processOrders(allOrders,
-                businessData.getStartDiscountPercent(),
-                businessData.getDiscountStep(),
-                businessData.getMinDiscountPercent(),
-                businessData.getPriceFor50Kg(),
-                businessData.getKgPerBag())) ,
-                resultFilePath);
+        BuisnessLogicMain buisnessLogicMain = new BuisnessLogicMain();
+        buisnessLogicMain.BuisnessLogic(businessData);
 
 
-        System.out.println("Расчет закончен : " + resultFilePath);
     }
+
+
 }

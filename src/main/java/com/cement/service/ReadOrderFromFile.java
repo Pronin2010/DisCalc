@@ -19,7 +19,7 @@ public class ReadOrderFromFile {
             } else {
                 throw new RuntimeException("Не найдены разделители");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("Не возможно прочитать файл: " + filePath);
         }
     }
