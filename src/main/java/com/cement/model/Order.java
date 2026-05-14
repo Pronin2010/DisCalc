@@ -7,10 +7,10 @@ public class Order {
     private String companyName;
     private int cementKg;
 
-public Order (LocalDateTime orderTime, String companyName, int cementKg ) {
-    this.orderTime = orderTime;
-    this.companyName = companyName;
-    this.cementKg = cementKg;
+        public Order (LocalDateTime orderTime, String companyName, int cementKg ) {
+            this.orderTime = orderTime;
+            this.companyName = companyName;
+            this.cementKg = cementKg;
 }
 
     public LocalDateTime getOrderTime() {

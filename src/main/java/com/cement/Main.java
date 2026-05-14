@@ -1,15 +1,13 @@
 package com.cement;
 
-
-import com.cement.adapter.RawOrderReaderAdapter;
-import com.cement.adapter.TxtOrderReaderAdapter;
 import com.cement.model.Order;
 import com.cement.service.DiscountService;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
+import com.cement.service.ReadOrderFromFile;
+import com.cement.service.WriteResultInFile;
+import com.cement.model.BusinessData;
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class Main {
@@ -20,27 +18,21 @@ public class Main {
         String resultFilePath = "OutputData/result.txt";
 
         List<Order> allOrders = new ArrayList<>();
-        allOrders.addAll(readOrdersFromFile(inputFilePath));
-
+        ReadOrderFromFile readOrder = new ReadOrderFromFile();
+        WriteResultInFile writeResult = new WriteResultInFile();
         DiscountService discountService = new DiscountService();
-        discountService.processOrders(allOrders, resultFilePath);
+        BusinessData businessData = new BusinessData();
+
+        allOrders.addAll(readOrder.readOrdersFromFile(inputFilePath));
+        writeResult.writeResultInFile((discountService.processOrders(allOrders,
+                businessData.getStartDiscountPercent(),
+                businessData.getDiscountStep(),
+                businessData.getMinDiscountPercent(),
+                businessData.getPriceFor50Kg(),
+                businessData.getKgPerBag())) ,
+                resultFilePath);
+
 
         System.out.println("Расчет закончен : " + resultFilePath);
     }
-
-    private static List<Order> readOrdersFromFile(String filePath) {
-        try {
-            String firstLine = Files.readAllLines(Path.of(filePath)).getFirst();
-            if (firstLine.contains("|")) {
-                return new TxtOrderReaderAdapter().readOrder(filePath);
-            } else if (firstLine.contains("#")) {
-                return new RawOrderReaderAdapter().readOrder(filePath);
-            } else {
-                throw new RuntimeException("Не найдены разделители");
-            }
-        } catch (Exception e){
-            throw new RuntimeException("Не возможно прочитать файл: " + filePath);
-        }
-    }
-
 }
