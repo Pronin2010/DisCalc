@@ -16,7 +16,7 @@ public class OrderAdapterFactory {
             } else if (firstLine.contains("#")) {
                 return new RawOrderAdapter().readOrder(filePath);
             } else {
-                throw new RuntimeException("Не найдены разделители");
+                throw new IORuntimeException("Не найдены разделители");
             }
         } catch (Exception e) {
             throw new IORuntimeException("Не возможно прочитать файл: " + filePath);
