@@ -1,6 +1,6 @@
 package com.cement.model;
 
-public class BusinessData {
+public class OrderDiscountParam {
 
     private int priceFor50Kg;
     private int kgPerBag;
@@ -10,7 +10,7 @@ public class BusinessData {
     private String inputFilePath;
     private String resultFilePath;
 
-    public BusinessData(int priceFor50Kg, int kgPerBag, int startDiscountPercent, int discountStep, int minDiscountPercent, String inputFilePath, String resultFilePath) {
+    public OrderDiscountParam(int priceFor50Kg, int kgPerBag, int startDiscountPercent, int discountStep, int minDiscountPercent, String inputFilePath, String resultFilePath) {
         this.priceFor50Kg = priceFor50Kg;
         this.kgPerBag = kgPerBag;
         this.startDiscountPercent = startDiscountPercent;

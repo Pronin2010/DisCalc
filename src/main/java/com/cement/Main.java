@@ -1,14 +1,17 @@
 package com.cement;
 
-import com.cement.model.BusinessData;
-import com.cement.service.BuisnessLogicMain;
+import com.cement.adapter.OrderAdapterFactory;
+import com.cement.model.OrderDiscountParam;
+import com.cement.service.DiscountService;
+import com.cement.service.FileOrderService;
+import com.cement.service.OrderManager;
 
 
 public class Main {
 
     static void main(String[] args) {
 
-        BusinessData businessData = new BusinessData(
+        OrderDiscountParam orderDiscountParam = new OrderDiscountParam(
                 500,
                 50,
                 50,
@@ -18,8 +21,12 @@ public class Main {
                 "OutputData/result.txt"
         );
 
-        BuisnessLogicMain buisnessLogicMain = new BuisnessLogicMain();
-        buisnessLogicMain.BuisnessLogic(businessData);
+        OrderAdapterFactory readOrder = new OrderAdapterFactory();
+        FileOrderService writeResult = new FileOrderService();
+        DiscountService discountService = new DiscountService();
+
+        OrderManager orderManager = new OrderManager(readOrder, writeResult, discountService);
+        orderManager.process(orderDiscountParam);
 
 
     }

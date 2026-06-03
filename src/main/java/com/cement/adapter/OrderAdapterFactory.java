@@ -1,26 +1,25 @@
-package com.cement.service;
+package com.cement.adapter;
 
-import com.cement.adapter.RawOrderReaderAdapter;
-import com.cement.adapter.TxtOrderReaderAdapter;
+import com.cement.CastomExceptions.IORuntimeException;
 import com.cement.model.Order;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadOrderFromFile {
+public class OrderAdapterFactory {
     public List<Order> readOrdersFromFile(String filePath) {
         try {
             String firstLine = Files.readAllLines(Path.of(filePath)).getFirst();
             if (firstLine.contains("|")) {
-                return new TxtOrderReaderAdapter().readOrder(filePath);
+                return new TxtOrderAdapter().readOrder(filePath);
             } else if (firstLine.contains("#")) {
-                return new RawOrderReaderAdapter().readOrder(filePath);
+                return new RawOrderAdapter().readOrder(filePath);
             } else {
                 throw new RuntimeException("Не найдены разделители");
             }
         } catch (Exception e) {
-            throw new RuntimeException("Не возможно прочитать файл: " + filePath);
+            throw new IORuntimeException("Не возможно прочитать файл: " + filePath);
         }
     }
 

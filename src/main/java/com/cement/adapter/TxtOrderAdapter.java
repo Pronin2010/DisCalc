@@ -1,5 +1,6 @@
 package com.cement.adapter;
 
+import com.cement.CastomExceptions.IORuntimeException;
 import com.cement.model.Order;
 
 import java.nio.file.Files;
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class TxtOrderReaderAdapter implements OrderReader {
+public class TxtOrderAdapter implements OrderAdapter {
     private static final String DELIMITER = "\\|";
 
     @Override
@@ -24,7 +25,7 @@ public class TxtOrderReaderAdapter implements OrderReader {
                     ))
                     .toList();
         } catch (Exception e) {
-            throw new RuntimeException("Не удалось прочитать файл: " + filePath);
+            throw new IORuntimeException("Не удалось прочитать файл: " + filePath);
         }
     }
 }
