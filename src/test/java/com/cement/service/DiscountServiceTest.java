@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DiscountServiceTest {
 
-    private DiscountService discountService = new DiscountService();
+    private final DiscountService discountService = new DiscountService();
 
     @Test
     void returnEmptyList (){
@@ -42,7 +42,7 @@ class DiscountServiceTest {
         assertEquals("Company 1", result.get(0));
     }
     @Test
-    void discountStepsForThreeOrders(){
+    void discountStepsForFourOrders(){
         Order order1 = new Order(LocalDateTime.parse("2021-02-09T16:00:22"),
                 "Company1",
                 1000);
@@ -52,17 +52,21 @@ class DiscountServiceTest {
         Order order3 = new Order(LocalDateTime.parse("2021-04-09T16:00:22"),
                 "Company3",
                 1000);
+        Order order4 = new Order(LocalDateTime.parse("2021-05-09T16:00:22"),
+                "Company4",
+                1000);
 
         List<String> result = discountService.processOrders(
-                List.of(order1, order2, order3),
-                15,
-                10,
-                5,
+                List.of(order1, order2, order3, order4),
+                7,
+                3,
+                0,
                 500,
                 50);
 
-        assertEquals("Company1:8500", result.get(0));
-        assertEquals("Company2:9500", result.get(1));
-        assertEquals("Company3:9500", result.get(2));
+        assertEquals("Company1:9300", result.get(0));
+        assertEquals("Company2:9600", result.get(1));
+        assertEquals("Company3:9900", result.get(2));
+        assertEquals("Company4:10000", result.get(3));
     }
 }

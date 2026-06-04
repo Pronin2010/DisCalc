@@ -63,12 +63,9 @@ class OrderManagerTest {
                 50
         )).thenReturn(processedOrders);
 
-
         orderManager.process(params);
 
-
         verify(readOrder).readOrdersFromFile(params.getInputFilePath());
-
 
         verify(discountService).processOrders(
                 ordersFromFile,
@@ -78,9 +75,7 @@ class OrderManagerTest {
                 500,
                 50);
 
-
         verify(writeResult).write(processedOrders, params.getResultFilePath());
-
 
         verifyNoMoreInteractions(readOrder, discountService, writeResult);
     }

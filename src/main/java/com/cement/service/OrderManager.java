@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderManager {
-            private OrderAdapterFactory readOrder;
-            private FileOrderService writeResult;
-            private DiscountService discountService;
+            private final OrderAdapterFactory readOrder;
+            private final FileOrderService writeResult;
+            private final DiscountService discountService;
 
             public OrderManager(OrderAdapterFactory readOrder,
                                      FileOrderService writeResult,
